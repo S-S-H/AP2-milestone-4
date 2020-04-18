@@ -3,9 +3,11 @@ package client_side;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Lexer {
+public class Lexer 
+{
 	//singleton.
-	private static class LexerHolder{
+	private static class LexerHolder
+	{
 		public static final Lexer lexer= new Lexer();
 	}
 	
@@ -18,7 +20,7 @@ public class Lexer {
 	
 	//TODO: use a regex to break expression tokens properly.
 	//breaks the code into tokens, line by line.
-	private String[] lexer(String code)
+	public String[] lexer(String code)
 	{
 		ArrayList<String> tokens=new ArrayList<String>();
 		Scanner s=new Scanner(code);
