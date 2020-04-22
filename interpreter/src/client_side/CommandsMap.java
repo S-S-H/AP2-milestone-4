@@ -15,6 +15,12 @@ public CommandsMap()
 	CommandsMapper.put("sleep",new SleepCommand());
 	CommandsMapper.put("print",new PrintCommand());
 	CommandsMapper.put("return",new ReturnCommand());
+	CommandsMapper.put("=",new AssignmentCommand());
+	CommandsMapper.put("=bind",new BindAssignmentCommand());
+	CommandsMapper.put("while",new LoopCommand());
+	CommandsMapper.put("if",new IfCommand());
+	CommandsMapper.put("disconnect",new DisconnectCommand());
+	
 }
 
 public Command get(String key)

@@ -1,20 +1,30 @@
 package client_side.command;
 
+
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
 import java.util.List;
 
 public class ConnectCommand implements Command {
-
+    public static Socket connection=null;//we only open one session towards the simulator.
 	@Override
 	public int getArguments(String[] tokens, int idx, List<Object> emptyList) {
-	
+		return StringToArgumentParser.parse(tokens, idx, 2, emptyList, "String", "Integer");
 	}
 
 	@Override
 	public void doCommand(List<Object> args) {
-		// TODO Auto-generated method stub
-		
+
+		String ip = args.get(0).toString();
+		int port = (int) args.get(1);
+		try {
+			this.connection = new Socket(ip, port);
+		} catch (IOException e) {
+
+		}
+
 	}
-
-
-
+		
 }
