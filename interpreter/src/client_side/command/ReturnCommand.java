@@ -6,15 +6,17 @@ public class ReturnCommand implements Command {
 
 	@Override
 	public int getArguments(String[] tokens, int idx, List<Object> emptyList) {
-		// TODO Auto-generated method stub
-		return 0;
+		return StringToArgumentParser.parse(tokens, idx, 1, emptyList, "Double");
 	}
 
 	@Override
 	public void doCommand(List<Object> args) {
-		// TODO Auto-generated method stub
-		
+		double value = (double) args.get(0);
+		retValue(value);
 	}
 
-	
+	private double retValue(double value) {
+		return value;
+	}
+
 }

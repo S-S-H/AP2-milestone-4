@@ -10,13 +10,10 @@ public class SleepCommand implements Command {
 	}
 	
 	@Override
-	public void doCommand(List<Object> args) {
-		
+	public void doCommand(List<Object> args) {		
 		try {
 			long millis=(long)args.get(0);
 			Thread.sleep(millis);
-		    } catch (InterruptedException | IllegalArgumentException e ) {e.printStackTrace();}
-				
+		    } catch (InterruptedException | IllegalArgumentException e ) {e.printStackTrace();}				
 	}
-
 }

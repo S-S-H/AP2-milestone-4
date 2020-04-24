@@ -11,11 +11,7 @@ public class MyInterpreter {
 	
 	//it should be here since various command use the hashmap.
 	public static HashMap<String,Var> SymbolTable=new HashMap<String,Var>();
-S
-	
-    
-    
-	
+
 	public static int interpret(String[] lines){
 	
 		return 0;
@@ -26,8 +22,4 @@ S
 	//TODO: make sure to parse the expression.
 
 
-		
 	}
-	
-	
-}
