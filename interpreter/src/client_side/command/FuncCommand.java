@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FuncCommand implements Command {
-
+//still not sure what this command should be, is it a function as an expression or something??
 	private ArrayList<Command> commands;
 
 	@Override

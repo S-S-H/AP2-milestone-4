@@ -39,10 +39,15 @@ public abstract class ConditionParser implements Command {
 	    parser.parse(block);
 	    
 	    return block_start-block_end;
+	    //I think you mean to return the block_end, 
+	    //the command itself suppose to activate all the other commands in the brackets at the doCommand function.
+	    //maybe we need to save the entire block and not the commands? after that we'll send it to the parser at the doCommand;
 	}
 	
 //one-time condition-parsing.
 	private void parseCondition(String[] tokens, int idx) {
+		//the idea of putting another function only for the parsing the condition and putting it inside of the variable for the command is awesome 
+		//but we need also exception if we couldn't find the "{" symbol or if there's a command in the condition etc.
 		String str = "";
 		while (!tokens[idx].contentEquals("{")) {
 			str += tokens[idx];
@@ -65,6 +70,7 @@ public abstract class ConditionParser implements Command {
 		fixed_exp = ExpressionConvertor.infixToPostfix(Arrays.asList(parsed_condition[2]));
 		double arg2 = ExpressionConvertor.calculatePostfix(fixed_exp);
 		String operator = parsed_condition[2];
+		//where is the two expression (parsed conditions) we compare between?? shouldn't we use parsed_condition[1]??
 		switch (operator) {
 		case "==":
 			return arg1 == arg2;
@@ -86,6 +92,7 @@ public abstract class ConditionParser implements Command {
 			
 		}
         return false;//or true..?
+        //^^ this line should never happen if we say there's always two arguments to the condition
 	}
 
 }
