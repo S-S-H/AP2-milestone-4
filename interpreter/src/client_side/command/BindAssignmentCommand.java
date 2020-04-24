@@ -2,8 +2,8 @@ package client_side.command;
 
 import java.util.List;
 
-import client_side.expression.BindVar;
-import client_side.expression.Var;
+import Variable.*;
+import client_side.expression.MyDataServer;
 import test.MyInterpreter;
 
 public class BindAssignmentCommand implements Command {
@@ -17,10 +17,19 @@ public class BindAssignmentCommand implements Command {
 	@Override
 	public void doCommand(List<Object> args) {
 		String name=args.get(0).toString();
-		String path=args.get(1).toString();
-		//meaning the variable has been created before by the var command being invoked.
-		if( MyInterpreter.SymbolTable.containsKey(name))
-			MyInterpreter.SymbolTable.put(name,new BindVar(name,path));
+		String identifier=args.get(1).toString();//either a path or a local var name.
+		//variable has been created before command invoking.
+		//binding to a script variable
+		if( MyInterpreter.SymbolTable.containsKey(identifier))
+		{
+		  Var to_bound=MyInterpreter.SymbolTable.get(identifier);
+		  MyInterpreter.SymbolTable.put(name,new BoundScriptVar(to_bound));
+		}
+		else //binding to a remote variable
+		{			
+			  MyInterpreter.SymbolTable.put(name,new BoundRemoteVar(identifier,MyDataServer.getServer()));						
+		}
+		
 
 	}
 

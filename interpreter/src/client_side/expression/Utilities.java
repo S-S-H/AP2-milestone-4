@@ -1,5 +1,7 @@
 package client_side.expression;
 
+import Variable.RegularVar;
+import Variable.Var;
 import test.MyInterpreter;
 
 public class Utilities {
@@ -18,7 +20,7 @@ public class Utilities {
 		if (MyInterpreter.SymbolTable.containsKey(name)) {
 			double value = MyInterpreter.SymbolTable.get(name).calculate();
 			//we create a new one since we don't want to harm the one in the symbol-table.
-			return new RegularVar(name, value);
+			return new RegularVar(value);
 		}
 		return null;
 

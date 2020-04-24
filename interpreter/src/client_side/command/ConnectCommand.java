@@ -20,7 +20,7 @@ public class ConnectCommand implements Command {
 		String ip = args.get(0).toString();
 		int port = (int) args.get(1);
 		try {
-			this.connection = new Socket(ip, port);
+			connection = new Socket(ip, port);
 		} catch (IOException e) {
 
 		}

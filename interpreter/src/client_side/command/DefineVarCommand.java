@@ -2,7 +2,7 @@ package client_side.command;
 
 import java.util.List;
 
-import client_side.expression.Var;
+import Variable.Var;
 import test.MyInterpreter;
 
 public class DefineVarCommand implements Command {

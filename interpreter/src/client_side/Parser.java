@@ -2,8 +2,9 @@ package client_side;
 
 import java.util.ArrayList;
 import java.util.List;
-import client_side.CommandsMap;
+
 import client_side.command.Command;
+import client_side.command.CommandsMap;
 
 public class Parser {
 //the parser needs to know the commands..	

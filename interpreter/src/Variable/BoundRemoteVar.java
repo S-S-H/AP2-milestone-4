@@ -1,4 +1,4 @@
-package client_side.expression;
+package Variable;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -6,22 +6,21 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import client_side.command.ConnectCommand;
+import client_side.expression.DataGetter;
 
-public class BindVar extends Var {
+public class BoundRemoteVar implements Var{
+
 	String path;
-	Var bounded;
-//inherited data members:
-	//string name
-	//double value 
-	//TODO: not only the server vars can be bounded. handle this!!!
-	public BindVar(String name, String path) {
-		super(name);
-		this.path = path;
+	DataGetter getter;
+	
+	public BoundRemoteVar(String path,DataGetter getter) {
+		this.path=path;
+		this.getter=getter;
 	}
 	
-	
-	
-	public void set(Double value) {
+
+	@Override
+	public void set(double value) {
 	    Socket connection=ConnectCommand.connection;
 	    
 	    try {
@@ -32,11 +31,11 @@ public class BindVar extends Var {
 		    //because of the server thread I'm running.
 		} catch (IOException e) {e.printStackTrace();}	
 	}
-			
+	
 
 	@Override
 	public double calculate() {
-		return this.value;
+	return getter.get(path);
 	}
-
+	
 }

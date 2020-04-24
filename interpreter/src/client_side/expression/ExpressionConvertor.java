@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
+import Variable.Var;
+
 public class ExpressionConvertor {
 	
 	public static String infixToPostfix(List<String> split) {
