@@ -3,26 +3,35 @@ package client_side.command;
 import java.util.HashMap;
 
 public class CommandsMap {
-	public HashMap<String, Command> CommandsMapper;
+	private HashMap<String, Command> map;
 
-	public CommandsMap() {
-		CommandsMapper = new HashMap<String, Command>();
-		CommandsMapper.put("connect", new ConnectCommand());
-		CommandsMapper.put("openDataServer", new OpenServerCommand());
-		CommandsMapper.put("var", new DefineVarCommand());
-		CommandsMapper.put("sleep", new SleepCommand());
-		CommandsMapper.put("print", new PrintCommand());
-		CommandsMapper.put("return", new ReturnCommand());
-		CommandsMapper.put("=", new AssignmentCommand());
-		CommandsMapper.put("=bind", new BindAssignmentCommand());
-		CommandsMapper.put("while", new LoopCommand());
-		CommandsMapper.put("if", new IfCommand());
-		CommandsMapper.put("disconnect", new DisconnectCommand());
+	public static class CommandsMapHolder {
+		private static final CommandsMap commands_mapper = new CommandsMap();
+	}
+
+	public static CommandsMap getInstance() {
+		return CommandsMapHolder.commands_mapper;
+	}
+
+	private CommandsMap() {
+
+		map = new HashMap<String, Command>();
+		map.put("connect", new ConnectCommand());
+		map.put("openDataServer", new OpenServerCommand());
+		map.put("var", new DefineVarCommand());
+		map.put("sleep", new SleepCommand());
+		map.put("print", new PrintCommand());
+		map.put("return", new ReturnCommand());
+		map.put("=", new AssignmentCommand());
+		map.put("=bind", new BindAssignmentCommand());
+		map.put("while", new LoopCommand());
+		map.put("if", new IfCommand());
+		map.put("disconnect", new DisconnectCommand());
 
 	}
 
 	public Command get(String key) {
-		return CommandsMapper.get(key);
+		return map.get(key);
 	}
 
 }

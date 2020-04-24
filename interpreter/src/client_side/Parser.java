@@ -15,7 +15,7 @@ public class Parser {
 	}
 
 	private Parser() {
-		mapper = new CommandsMap();
+		mapper = CommandsMap.getInstance();
 	}
 
 	public static Parser getInstance() {

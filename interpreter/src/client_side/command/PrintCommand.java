@@ -10,7 +10,7 @@ public class PrintCommand implements Command {
 	}
 
 	@Override
-	public void doCommand(List<Object> args) {
+	public void doCommand(List<Object> args) {//TODO: make it support expressions and vars printing.
 		String str = args.get(0).toString();
 		System.out.println(str);
 	}
