@@ -77,9 +77,8 @@ public class MyDataServer implements DataServer {
 	}
 	@Override
 	public void close() {
-		if (!open)
-			return;
+		if (!open) return;
 		this.open = false;
 	}
-
+	
 }

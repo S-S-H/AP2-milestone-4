@@ -1,11 +1,8 @@
 package client_side.command;
-//TODO: FIX THIS AND THINK ABOUT A BETTER DESIGN.
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
-
 import client_side.Lexer;
 import client_side.Parser;
 import client_side.expression.ExpressionConvertor;

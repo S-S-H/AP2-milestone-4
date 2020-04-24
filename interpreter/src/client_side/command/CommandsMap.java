@@ -2,8 +2,6 @@ package client_side.command;
 
 import java.util.HashMap;
 
-import client_side.command.*;
-
 public class CommandsMap {
 	public HashMap<String, Command> CommandsMapper;
 

@@ -1,9 +1,7 @@
 package client_side.command;
 
 import java.util.List;
-
 import Variable.RegularVar;
-import Variable.Var;
 import test.MyInterpreter;
 
 public class AssignmentCommand implements Command {

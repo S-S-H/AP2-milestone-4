@@ -1,7 +1,6 @@
 package client_side.command;
 
 import java.util.List;
-
 import Variable.*;
 import client_side.expression.MyDataServer;
 import test.MyInterpreter;
