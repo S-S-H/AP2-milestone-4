@@ -1,25 +1,21 @@
 package test;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
+import java.util.*;
 import Variable.Var;
 import client_side.*;
-import client_side.command.Command;
+
 public class MyInterpreter {
 
-	//TODO: add the scopes class and support unglobal variables and add the function command.
-	
-	//it should be here since various command use the hashmap.
-	public static HashMap<String,Var> SymbolTable=new HashMap<String,Var>();
+	// it should be here since various command use the hashmap.
+	public static HashMap<String, Var> SymbolTable = new HashMap<String, Var>();
+	public static double returnValue = 0;
 
-	public static int interpret(String[] lines){
-	
-		return 0;
+	public static double interpret(String[] lines) {
+		Lexer lexer = Lexer.getInstance();
+		Parser parser = Parser.getInstance();
+		String[] tokens = lexer.lexer(lines.toString());
+		parser.parse(tokens);
+		return returnValue;
 	}
-	
-	
-	
-	//TODO: make sure to parse the expression.
 
-
-	}
+}

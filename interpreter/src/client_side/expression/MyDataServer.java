@@ -12,32 +12,29 @@ public class MyDataServer implements DataServer {
 
 	private HashMap<String, Double> values;
 	private volatile boolean open;
-	
-	private static class MyServerHolder
-	{
-      public static final MyDataServer ds=new MyDataServer();
+
+	private static class MyServerHolder {
+		public static final MyDataServer ds = new MyDataServer();
 	}
-	
-	private MyDataServer()
-	{
+
+	private MyDataServer() {
 		values = new HashMap<String, Double>();
-		open = false;	
+		open = false;
 	}
-	
-	public static DataServer getServer()
-	{
-	   return MyServerHolder.ds;
+
+	public static DataServer getServer() {
+		return MyServerHolder.ds;
 	}
-	
+
 	@Override
 	public double get(String path) {
 		return values.get(path);
 	}
 
-	
 	@Override
 	public void open(int port, int freq, String[] paths) {
-		if (open) return;
+		if (open)
+			return;
 		open = true;
 		Thread server_thread = new Thread(() -> {
 			try {
@@ -48,14 +45,11 @@ public class MyDataServer implements DataServer {
 				BufferedReader inputFromClient = new BufferedReader(new InputStreamReader(in));
 				while (open) {
 
-					
-					// TODO: realize who invokes the stop and each disconnection.
-
 					String[] new_values = inputFromClient.readLine().split(",");
 					for (int i = 0; i < new_values.length; i++) {
 						String path = paths[i];
 						double value = Double.parseDouble(new_values[i]);
-						values.put(path, value);			
+						values.put(path, value);
 					}
 
 					Thread.sleep(1000 / freq);
@@ -75,10 +69,12 @@ public class MyDataServer implements DataServer {
 		server_thread.start();
 
 	}
+
 	@Override
 	public void close() {
-		if (!open) return;
+		if (!open)
+			return;
 		this.open = false;
 	}
-	
+
 }
