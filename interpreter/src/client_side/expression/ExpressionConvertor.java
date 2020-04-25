@@ -9,7 +9,7 @@ import java.util.Stack;
 import Variable.Var;
 
 public class ExpressionConvertor {
-	
+
 	public static String infixToPostfix(List<String> split) {
 		Stack<String> stack = new Stack<>();
 		Queue<String> queue = new LinkedList<>();

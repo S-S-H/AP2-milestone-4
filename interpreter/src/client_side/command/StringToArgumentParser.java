@@ -3,6 +3,8 @@ package client_side.command;
 import java.util.Arrays;
 import java.util.IllegalFormatConversionException;
 import java.util.List;
+
+import client_side.expression.ExpressionCalculate;
 import client_side.expression.ExpressionConvertor;
 
 public class StringToArgumentParser {
@@ -26,8 +28,8 @@ public class StringToArgumentParser {
 					//TODO: check for this error here 
 					args.add(tokens[idx]);
 				else {
-					String fixed_exp = ExpressionConvertor.infixToPostfix(Arrays.asList(tokens[i]));
-					double arg = ExpressionConvertor.calculatePostfix(fixed_exp);
+					
+					double arg =ExpressionCalculate.invoke(Arrays.asList(tokens[i]));//go-to class and read doc.
 					switch (type) {
 					case "Double":
 						args.add(arg);

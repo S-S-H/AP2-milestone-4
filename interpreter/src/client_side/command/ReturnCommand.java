@@ -9,14 +9,14 @@ public class ReturnCommand implements Command {
 		return StringToArgumentParser.parse(tokens, idx, 1, emptyList, "Double");
 	}
 
+	//the calculated value is already in args[0]
 	@Override
 	public void doCommand(List<Object> args) {
-		double value = (double) args.get(0);
-		retValue(value);
+	
 	}
 
-	private double retValue(double value) {
+	/*private double retValue(double value) {
 		return value;
-	}
+	}*/
 
 }

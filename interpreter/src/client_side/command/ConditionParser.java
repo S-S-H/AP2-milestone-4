@@ -3,21 +3,18 @@ package client_side.command;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import client_side.expression.ExpressionConvertor;
+import client_side.expression.ExpressionCalculate;
 
 public abstract class ConditionParser implements Command {
 
 	protected String[] block;
 	private String[] condition;
 
-
 	// re-calculate the condition
 	protected boolean state() {
 		String operator = condition[1];
-		String fixed_exp = ExpressionConvertor.infixToPostfix(Arrays.asList(condition[0]));
-		double x = ExpressionConvertor.calculatePostfix(fixed_exp);
-		fixed_exp = ExpressionConvertor.infixToPostfix(Arrays.asList(condition[2]));
-		double y = ExpressionConvertor.calculatePostfix(fixed_exp);
+		double x = ExpressionCalculate.invoke(Arrays.asList(condition[0]));
+		double y = ExpressionCalculate.invoke(Arrays.asList(condition[2]));
 		switch (operator) {
 		case "==":
 			return (x == y);
@@ -39,6 +36,16 @@ public abstract class ConditionParser implements Command {
 	// they're considered arguments because theyre relevant for the while to run
 	@Override
 	public int getArguments(String[] tokens, int idx, List<Object> emptyList) {
+		// while(we are here)...{
+		//saving the condition
+		List<String> condition = new LinkedList<String>();
+		for (String token : tokens) {
+			if (token == "{")
+				break;
+			condition.add(token);
+		}
+		condition.toArray(this.condition);
+
 		int open_curly = 1;
 		int close_curly = 0;
 		int block_end = idx;
@@ -51,7 +58,7 @@ public abstract class ConditionParser implements Command {
 			else if (token == "}")
 				close_curly++;
 			container.add(token);
-			container = container.subList(1, container.size() - 2);// since we dont need the { } of the current block.
+			container = container.subList(1, container.size() - 2);// since we don't need the { } of the current block.
 			container.toArray(this.block);
 		}
 		return block_end - idx;// tells the first parser to run to advance in the total block size.
