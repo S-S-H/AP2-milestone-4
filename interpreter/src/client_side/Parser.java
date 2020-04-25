@@ -2,10 +2,9 @@ package client_side;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import client_side.command.Command;
 import client_side.command.CommandsMap;
-import client_side.command.ReturnCommand;
+
 
 public class Parser {
 //the parser needs to know the commands..	
@@ -27,7 +26,7 @@ public class Parser {
 		List<Object> args = new ArrayList<Object>();
 		Command c;
 		for (int i = 0; i < tokens.length;) {
-			args.clear();//re-using an empty list for each command.
+			args.clear();// re-using an empty list for each command.
 			c = mapper.get(tokens[i]);// check whether the specific token is a command or not.
 			if (c != null) {
 				i += c.getArguments(tokens, i, args);// one line of calling the stringtoarg parser in each cmd.
@@ -35,16 +34,6 @@ public class Parser {
 			}
 
 		}
-	if(c instanceof ReturnCommand) returnMethod(args);	
-	
+
 	}
-        
-	}
-	
-	private double returnMethod(List<Object> args)
-	{
-		return (double)(args.get(0));
-	}
-	
-	
 }
