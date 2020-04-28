@@ -6,7 +6,7 @@ public class SleepCommand implements Command {
 
 	@Override
 	public int getArguments(String[] tokens, int idx, List<Object> emptyList) {
-		return StringToArgumentParser.parse(tokens, idx+1,1, emptyList, "Integer");
+		return StringToArgumentParser.parse(tokens, idx,1, emptyList, "Integer");
 	}
 	
 	@Override
