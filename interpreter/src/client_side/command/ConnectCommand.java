@@ -9,7 +9,7 @@ public class ConnectCommand implements Command {
 
 	@Override
 	public int getArguments(String[] tokens, int idx, List<Object> emptyList) {
-		return StringToArgumentParser.parse(tokens, idx, 2, emptyList, "String", "Integer");
+		return StringToArgumentParser.parse(tokens, idx+1, 2, emptyList, "String", "Integer");
 	}
 
 	@Override

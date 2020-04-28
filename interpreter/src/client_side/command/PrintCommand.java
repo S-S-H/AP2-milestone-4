@@ -9,7 +9,7 @@ public class PrintCommand implements Command {
 
 	@Override
 	public int getArguments(String[] tokens, int idx, List<Object> emptyList) {
-		return StringToArgumentParser.parse(tokens, idx, 1, emptyList, "String");
+		return StringToArgumentParser.parse(tokens, idx+1, 1, emptyList, "String");
 	}
 
 	@Override
