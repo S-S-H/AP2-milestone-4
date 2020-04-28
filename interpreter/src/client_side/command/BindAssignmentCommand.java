@@ -7,10 +7,11 @@ import test.MyInterpreter;
 
 public class BindAssignmentCommand implements Command {
 
+	//TODO: compile a pattern which unites the =bind together as one element.
 	@Override
 	public int getArguments(String[] tokens, int idx, List<Object> emptyList) {
-		emptyList.add(tokens[idx]);//add the name first
-		return StringToArgumentParser.parse(tokens, idx+3, 1, emptyList, "String");
+		emptyList.add(tokens[idx-1]);//add the name first
+		return StringToArgumentParser.parse(tokens, idx+2, 1, emptyList, "String");
 	}
 
 	@Override
