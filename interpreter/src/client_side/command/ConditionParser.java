@@ -38,6 +38,7 @@ public abstract class ConditionParser implements Command {
 	public int getArguments(String[] tokens, int idx, List<Object> emptyList) {
 		// while(we are here)...{
 		//saving the condition
+		//TODO: invoke the lexer function on the condition as well?
 		List<String> condition = new LinkedList<String>();
 		for (String token : tokens) {
 			if (token == "{")

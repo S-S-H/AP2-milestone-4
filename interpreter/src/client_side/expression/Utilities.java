@@ -1,5 +1,7 @@
 package client_side.expression;
 
+import java.util.HashMap;
+
 import Variable.RegularVar;
 import Variable.Var;
 import test.MyInterpreter;
@@ -24,5 +26,11 @@ public class Utilities {
 		}
 		return null;
 
+	}
+	
+	public static boolean IsVar(String name)
+	{
+		HashMap<String, Var> table= MyInterpreter.SymbolTable;
+		return table.containsKey(name);
 	}
 }

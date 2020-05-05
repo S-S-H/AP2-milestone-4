@@ -23,6 +23,7 @@ public class Parser {
 	}
 
 	public void parse(String[] tokens) {
+	    
 		List<Object> args = new ArrayList<Object>();
 		Command c;
 		for (int i = 0; i < tokens.length;) {

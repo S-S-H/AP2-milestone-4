@@ -28,9 +28,9 @@ public class DisconnectCommand implements Command {
 		}
         //is the simulator server closing before the client?
 		//assume it isnt  
-		Socket client_session = ConnectCommand.connection;
+		
 		try {
-			client_session.close();
+			connection.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
