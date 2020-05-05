@@ -1,6 +1,5 @@
 package client_side.command;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import client_side.expression.ExpressionCalculate;
@@ -13,8 +12,8 @@ public abstract class ConditionParser implements Command {
 	// re-calculate the condition
 	protected boolean state() {
 		String operator = condition[1];
-		double x = ExpressionCalculate.invoke(Arrays.asList(condition[0]));
-		double y = ExpressionCalculate.invoke(Arrays.asList(condition[2]));
+		double x = ExpressionCalculate.invoke(condition[0]);
+		double y = ExpressionCalculate.invoke(condition[2]);
 		switch (operator) {
 		case "==":
 			return (x == y);

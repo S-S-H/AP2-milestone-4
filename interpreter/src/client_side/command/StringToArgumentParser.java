@@ -1,6 +1,5 @@
 package client_side.command;
 
-import java.util.Arrays;
 import java.util.IllegalFormatConversionException;
 import java.util.List;
 import client_side.expression.ExpressionCalculate;
@@ -17,10 +16,10 @@ public class StringToArgumentParser {
 			try {
 				String type = typeArguments[i];
 				if (type.equals("String"))
-					args.add(tokens[idx]);
+					args.add(tokens[idx+i]);
 				else {
 					//TODO:fix the split!
-					double arg =ExpressionCalculate.invoke(Arrays.asList(tokens[idx].split("")));//go-to class and read doc.
+					double arg =ExpressionCalculate.invoke(tokens[idx+i]);//go-to class and read doc.
 					switch (type) {
 					case "Double":
 						args.add(arg);

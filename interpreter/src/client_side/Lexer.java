@@ -76,12 +76,12 @@ public class Lexer {
 			  String value=fixed_code.get(fixed_code.size()-1);//last element
 			  if(ex_start)//in case we just started concreting 
 			  {
-				  fixed_code.add(token+token_next);
+				  fixed_code.add(token+" "+token_next);
 				 ex_start=false;				  
 			  }
 			  else//in case we are already concreting 
 			  {
-				  fixed_code.set(fixed_code.size()-1,value+token_next);
+				  fixed_code.set(fixed_code.size()-1,value+" "+token_next);
 			  }
 			  
 			  }

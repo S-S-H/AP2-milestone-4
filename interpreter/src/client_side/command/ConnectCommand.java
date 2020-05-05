@@ -5,7 +5,7 @@ import java.net.Socket;
 import java.util.List;
 
 public class ConnectCommand implements Command {
-	public Socket connection;// we only open one session towards the simulator.
+	public static Socket connection;// we only open one session towards the simulator.
 
 	@Override
 	public int getArguments(String[] tokens, int idx, List<Object> emptyList) {
@@ -20,10 +20,8 @@ public class ConnectCommand implements Command {
 		String ip = args.get(0).toString();
 		int port = (int) args.get(1);
 		try {
-			this.connection = new Socket(ip, port);
-		} catch (IOException e) {
-
-		}
+			connection = new Socket(ip, port);
+		} catch (IOException e) {e.printStackTrace();}
 
 	}
 
