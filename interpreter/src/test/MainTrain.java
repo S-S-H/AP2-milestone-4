@@ -67,7 +67,7 @@ public class MainTrain {
 		
 		if(MyInterpreter.interpret(test5)!=rand+2*5)
 			System.out.println("failed test5 (-20)");
-		
+	
 		sim.close();
 		System.out.println("done");
 	}

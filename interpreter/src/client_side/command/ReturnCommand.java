@@ -8,7 +8,7 @@ public class ReturnCommand implements Command {
 
 	@Override
 	public int getArguments(String[] tokens, int idx, List<Object> emptyList) {
-		return StringToArgumentParser.parse(tokens, idx+1, 1, emptyList, "Double");
+		return StringToArgumentParser.parse(tokens, idx, 1, emptyList, "Double");
 	}
 
 	// the calculated value is already in args[0]

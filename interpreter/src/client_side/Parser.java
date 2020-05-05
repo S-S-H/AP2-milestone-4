@@ -26,11 +26,11 @@ public class Parser {
 	    
 		List<Object> args = new ArrayList<Object>();
 		Command c;
-		for (int i = 0; i < tokens.length;) {
+		for (int i = 0; i < tokens.length;i++) {
 			args.clear();// re-using an empty list for each command.
 			c = mapper.get(tokens[i]);// check whether the specific token is a command or not.
 			if (c != null) {
-				i += c.getArguments(tokens, i, args);// one line of calling the stringtoarg parser in each cmd.
+				i += c.getArguments(tokens, i+1, args);// one line of calling the stringtoarg parser in each cmd.
 				c.doCommand(args);// the parser is the invoker
 			}
 

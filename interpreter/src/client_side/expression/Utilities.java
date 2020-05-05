@@ -1,9 +1,11 @@
 package client_side.expression;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import Variable.RegularVar;
 import Variable.Var;
+import client_side.command.CommandsMap;
 import test.MyInterpreter;
 
 public class Utilities {
@@ -28,9 +30,24 @@ public class Utilities {
 
 	}
 	
-	public static boolean IsVar(String name)
+
+	
+	public static boolean IsVarOrCmd(String str)
 	{
-		HashMap<String, Var> table= MyInterpreter.SymbolTable;
-		return table.containsKey(name);
+		try {
+			double d = Double.parseDouble(str);
+			return true;
+		} catch (NumberFormatException e) {
+			ArrayList<String> operators=new ArrayList<String>();
+			operators.add("+");
+			operators.add("-");
+			operators.add("/");
+			operators.add("*");
+			operators.add("(");
+			operators.add(")");
+			return !(operators.contains(str));			
+		}
 	}
+	
+	
 }

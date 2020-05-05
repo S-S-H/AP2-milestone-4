@@ -13,7 +13,10 @@ public class MyInterpreter {
 	public static double interpret(String[] lines) {
 		Lexer lexer = Lexer.getInstance();
 		Parser parser = Parser.getInstance();
-		String[] tokens = lexer.lexer(lines.toString());
+		StringJoiner sj = new StringJoiner("\n");
+		for(String line:lines) sj.add(line);
+		String code=sj.toString();
+		String[] tokens = lexer.lexer(code);
 		parser.parse(tokens);
 		return returnValue;
 	}

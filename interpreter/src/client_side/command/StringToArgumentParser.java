@@ -19,8 +19,8 @@ public class StringToArgumentParser {
 				if (type.equals("String"))
 					args.add(tokens[idx]);
 				else {
-					
-					double arg =ExpressionCalculate.invoke(Arrays.asList(tokens[i]));//go-to class and read doc.
+					//TODO:fix the split!
+					double arg =ExpressionCalculate.invoke(Arrays.asList(tokens[idx].split("")));//go-to class and read doc.
 					switch (type) {
 					case "Double":
 						args.add(arg);

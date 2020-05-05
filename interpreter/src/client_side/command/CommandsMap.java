@@ -33,5 +33,9 @@ public class CommandsMap {
 	public Command get(String key) {
 		return map.get(key);
 	}
+	public boolean contains(String key)
+	{
+		return map.containsKey(key);
+	}
 
 }
