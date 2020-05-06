@@ -38,29 +38,36 @@ public abstract class ConditionParser implements Command {
 		// while(we are here)...{
 		//saving the condition
 		//TODO: invoke the lexer function on the condition as well?
-		List<String> condition = new LinkedList<String>();
-		for (String token : tokens) {
-			if (token == "{")
+		List<String> condition_list = new LinkedList<String>();
+		int i=idx;
+		for (;;i++) {//TODO: make this more beautiful
+			String token=tokens[i];
+			if (token.equals("{"))
 				break;
-			condition.add(token);
+			condition_list.add(token);
 		}
-		condition.toArray(this.condition);
+		condition=new String[condition_list.size()];
+		condition=condition_list.toArray(condition);
+		
 
 		int open_curly = 1;
 		int close_curly = 0;
-		int block_end = idx;
+		int block_end =i+1;//skip the block {
 		List<String> container = new LinkedList<String>();
 		// a way to detect our block boundaries
 		while (close_curly < open_curly) {
 			String token = tokens[block_end];
-			if (token == "{")
+			if (token.equals("{"))
 				open_curly++;
-			else if (token == "}")
+			else if (token.equals("}"))
 				close_curly++;
 			container.add(token);
-			container = container.subList(1, container.size() - 2);// since we don't need the { } of the current block.
-			container.toArray(this.block);
+			block_end++;
+			
 		}
+		container = container.subList(0, container.size() - 1);// since we don't need the { } of the current block.
+		block=new String[container.size()];
+		container.toArray(block);
 		return block_end - idx;// tells the first parser to run to advance in the total block size.
 	}
 

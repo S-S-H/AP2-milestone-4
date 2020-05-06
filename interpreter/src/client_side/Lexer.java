@@ -88,9 +88,10 @@ public class Lexer {
 			
 			  
 			}
+
 		
 		if(!fixed_code.get(fixed_code.size()-1).endsWith(tokens.get(i))) fixed_code.add(tokens.get(i));
-			
+		
 			
 		String temp[] = fixed_code.toArray(new String[fixed_code.size()]);
 		return temp;

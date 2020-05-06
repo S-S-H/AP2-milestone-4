@@ -32,12 +32,12 @@ public class Simulator {
 				while(!stop){
 					out.println(simX+","+simY+","+simZ);
 					out.flush();
-					try {Thread.sleep(100);} catch (InterruptedException e1) {}
+					try {Thread.sleep(100);} catch (InterruptedException e1) {e1.printStackTrace();}
 				}
 				out.close();
 				interpreter.close();
 			} catch (IOException e) {
-				try {Thread.sleep(1000);} catch (InterruptedException e1) {}
+				try {Thread.sleep(1000);} catch (InterruptedException e1) {e1.printStackTrace();}
 			}
 		}
 	}
@@ -59,14 +59,14 @@ public class Simulator {
 								simY=Double.parseDouble(line.split(" ")[2]);
 							if(line.startsWith("set simZ"))
 								simZ=Double.parseDouble(line.split(" ")[2]);
-						}catch(NumberFormatException e){}
+						}catch(NumberFormatException e){e.printStackTrace();}
 					}
 					in.close();
 					client.close();
-				}catch(SocketTimeoutException e){}
+				}catch(SocketTimeoutException e){e.printStackTrace();}
 			}
 			server.close();
-		} catch (IOException e) {}
+		} catch (IOException e) {e.printStackTrace();}
 	}
 
 	public void close() {

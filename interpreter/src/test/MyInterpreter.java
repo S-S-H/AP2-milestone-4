@@ -21,8 +21,6 @@ public class MyInterpreter {
 		return returnValue;
 	}
 	
- 
-	
-	
+
 
 }

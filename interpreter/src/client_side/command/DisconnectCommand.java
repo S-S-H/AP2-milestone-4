@@ -40,6 +40,7 @@ public class DisconnectCommand implements Command {
 		
 		DataServer ds = MyDataServer.getServer();
 		ds.close();
+		System.out.println("disconnect command invoked");
 		
 	}
 

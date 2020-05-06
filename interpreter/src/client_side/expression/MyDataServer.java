@@ -12,6 +12,11 @@ public class MyDataServer implements DataServer {
 
 	private HashMap<String, Double> values;
 	private volatile boolean open;
+	
+	public HashMap<String, Double> getValues()//TODO: its an experiment, remove this later.
+	{
+		return this.values;
+	}
 
 	private static class MyServerHolder {
 		public static final MyDataServer ds = new MyDataServer();
@@ -28,7 +33,13 @@ public class MyDataServer implements DataServer {
 
 	@Override
 	public double get(String path) {
+		
+		System.out.println(values);
+		System.out.println("tried to access the variable");
+		System.out.println("var path: "+path);
+		System.out.println("var value: "+values.get(path));
 		return values.get(path);
+		
 	}
 
 	@Override
@@ -37,21 +48,23 @@ public class MyDataServer implements DataServer {
 			return;
 		open = true;
 		Thread server_thread = new Thread(() -> {
+			
 			try {
 				ServerSocket server = new ServerSocket(port);
 				server.setSoTimeout(3000);
 				Socket aClient = server.accept();
 				InputStream in = aClient.getInputStream();
 				BufferedReader inputFromClient = new BufferedReader(new InputStreamReader(in));
+		
 				while (open) {
-
 					String[] new_values = inputFromClient.readLine().split(",");
 					for (int i = 0; i < new_values.length; i++) {
 						String path = paths[i];
 						double value = Double.parseDouble(new_values[i]);
 						values.put(path, value);
 					}
-
+		
+					System.out.println("hasmap: "+values);
 					Thread.sleep(1000 / freq);
 
 				}
@@ -64,7 +77,7 @@ public class MyDataServer implements DataServer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			System.out.println("thread died");
 		});
 		server_thread.start();
 
