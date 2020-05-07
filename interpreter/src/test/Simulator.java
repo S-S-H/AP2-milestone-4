@@ -63,7 +63,7 @@ public class Simulator {
 					}
 					in.close();
 					client.close();
-				}catch(SocketTimeoutException e){e.printStackTrace();}
+				}catch(SocketTimeoutException e){}
 			}
 			server.close();
 		} catch (IOException e) {e.printStackTrace();}

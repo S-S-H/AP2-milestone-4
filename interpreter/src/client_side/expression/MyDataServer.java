@@ -6,24 +6,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MyDataServer implements DataServer {
 
-	private HashMap<String, Double> values;
+	private ConcurrentHashMap<String, Double> values;
 	private volatile boolean open;
-	
-	public HashMap<String, Double> getValues()//TODO: its an experiment, remove this later.
-	{
-		return this.values;
-	}
+	public static Object lock;
 
 	private static class MyServerHolder {
 		public static final MyDataServer ds = new MyDataServer();
 	}
 
 	private MyDataServer() {
-		values = new HashMap<String, Double>();
+		values = new ConcurrentHashMap<String, Double>();
 		open = false;
 	}
 
@@ -33,29 +29,28 @@ public class MyDataServer implements DataServer {
 
 	@Override
 	public double get(String path) {
-		
-		System.out.println(values);
-		System.out.println("tried to access the variable");
-		System.out.println("var path: "+path);
-		System.out.println("var value: "+values.get(path));
 		return values.get(path);
-		
 	}
 
 	@Override
-	public void open(int port, int freq, String[] paths) {
+	public void open(int port, int freq, String[] paths, Object lock) {
 		if (open)
 			return;
+		MyDataServer.lock = lock;
 		open = true;
 		Thread server_thread = new Thread(() -> {
-			
+
+			// its because of the connection!
+
 			try {
 				ServerSocket server = new ServerSocket(port);
 				server.setSoTimeout(3000);
 				Socket aClient = server.accept();
 				InputStream in = aClient.getInputStream();
 				BufferedReader inputFromClient = new BufferedReader(new InputStreamReader(in));
-		
+				synchronized (lock) {
+					lock.notify();// causes the main thread to wake up.
+				}
 				while (open) {
 					String[] new_values = inputFromClient.readLine().split(",");
 					for (int i = 0; i < new_values.length; i++) {
@@ -63,10 +58,25 @@ public class MyDataServer implements DataServer {
 						double value = Double.parseDouble(new_values[i]);
 						values.put(path, value);
 					}
-		
-					System.out.println("hasmap: "+values);
+
 					Thread.sleep(1000 / freq);
 
+				}
+
+				// since the client doesnt let us know the end of the relevant information we
+				// need to keep reading a little more
+				for (int x = 0; x < 10; x++) {
+					String[] new_values = inputFromClient.readLine().split(",");
+					for (int i = 0; i < new_values.length; i++) {
+						String path = paths[i];
+						double value = Double.parseDouble(new_values[i]);
+						values.put(path, value);
+					}
+
+					Thread.sleep(1000 / freq);
+				}
+				synchronized (lock) {
+					lock.notify();// tell the interpreter thread it's okay to keep going now.
 				}
 				aClient.close();
 				server.close();
@@ -77,7 +87,6 @@ public class MyDataServer implements DataServer {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("thread died");
 		});
 		server_thread.start();
 

@@ -25,8 +25,8 @@ public class BoundRemoteVar implements Var{
 	    
 	    try {
 			OutputStream out= connection.getOutputStream();
-			PrintWriter UserOutput=new PrintWriter(out);
-		    UserOutput.write("set"+" "+path+" "+value);
+			PrintWriter UserOutput=new PrintWriter(out,true);
+		    UserOutput.println("set"+" "+path+" "+value);
 			//after i send the value to the server it will make my local symbol-table change as well
 		    //because of the server thread I'm running.
 		} catch (IOException e) {e.printStackTrace();}	

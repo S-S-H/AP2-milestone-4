@@ -15,6 +15,7 @@ public class ReturnCommand implements Command {
 	@Override
 	public void doCommand(List<Object> args) {
 		MyInterpreter.returnValue = (double) args.get(0);
+		
 	}
 
 }
